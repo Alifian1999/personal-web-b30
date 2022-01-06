@@ -75,7 +75,7 @@
      let fullTime= (`${date} ${month[monthIndex]} ${year} ${hours}: ${minutes} WIB`)
      return fullTime
      }
-     getFullTime()
+     getFullTime(month)
      
    function getDistanceTime(time){
      let timePost= new Date ('Wed jan 05 2022 15:30:25 GMT+0700 (western Indonesia Time')
