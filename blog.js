@@ -1,8 +1,8 @@
 
- let blogs=[]
+ let blogs=[] 
 
- function addBlog(e){
-     e.preventDefault()
+ function addBlog(event){
+     event.preventDefault()
     
      let title = document.getElementById('input-blog-title').value
      let content= document.getElementById('input-blog-content').value
@@ -17,17 +17,16 @@
          author: 'Alifian Alfirazi',
          postAt: new Date(),
      }
-
      blogs.push(blog)
-     console.log(blogs);
      
      renderBlog()
  }
 
+
  function renderBlog(){
    let contentContainer = document.getElementById('contents')
 
-   contentContainer.innerHTML= ''
+   contentContainer.innerHTML= firstBlogPost()
 
    for(let i=0;i<blogs.length;i++){
     contentContainer.innerHTML+=
@@ -42,8 +41,7 @@
       </div>
       <h1>
         <a href="blog-detail.html" target="_blank"
-          >${blogs[i].title}
-        >
+          >${blogs[i].title}<a/>
       </h1>
       <div class="detail-blog-content">
         ${getFullTime(new Date())} | ${blogs[i].author}
@@ -51,18 +49,45 @@
       <p>
         ${blogs[i].content}
       </p>
-
-      <div style='text-align: right;>
-        <span style= 'font-size: 13px; color: grey'>
-        ${getDistanceTime(blogs[i].postAt)}
+      <div style="text-align:right">
+        <span style="font-size: 13px; color: gray">
+            ${getDistanceTime(blogs[i].postAt)}
         </span>
       </div>
-
     </div>
   </div>`
   }
  }
 
+function firstBlogPost(){
+  return ` <div class="blog-list-item">
+  <div class="blog-image">
+    <img src="assets/blog-img.png" alt="" />
+  </div>
+  <div class="blog-content">
+    <div class="btn-group">
+      <button class="btn-edit">Edit Post</button>
+      <button class="btn-post">Delete </button>
+    </div>
+    <h1>
+      <a href="blog-detail.html" target="_blank"
+        >Pasar Coding di Indonesia Dinilai Masih Menjanjikan</a>
+    </h1>
+    <div class="detail-blog-content">
+      12 Jul 2021 22:30 WIB | Ichsan Emrald Alamsyah
+    </div>
+    <p>
+      Ketimpangan sumber daya manusia (SDM) di sektor digital masih
+      menjadi isu yang belum terpecahkan. Berdasarkan penelitian
+      ManpowerGroup, ketimpangan SDM global, termasuk Indonesia,
+      meningkat dua kali lipat dalam satu dekade terakhir. Lorem ipsum,
+      dolor sit amet consectetur adipisicing elit. Quam, molestiae
+      numquam! Deleniti maiores expedita eaque deserunt quaerat! Dicta,
+      eligendi debitis?
+    </p>
+    </div>
+    </div>`
+}
 
  let month= ['january','february','march','april','may','june','july','august','september','october','november','december']
     
@@ -75,17 +100,17 @@
      let fullTime= (`${date} ${month[monthIndex]} ${year} ${hours}: ${minutes} WIB`)
      return fullTime
      }
-     getFullTime(month)
+     getFullTime(new Date())
      
    function getDistanceTime(time){
-     let timePost= new Date ('Wed jan 05 2022 15:30:25 GMT+0700 (western Indonesia Time')
+     let timePost= time
      let timeNow= new Date()
  
      let distance = timeNow - timePost
  
      let milisecond= 1000
      let secondInHours= 3600
-     let hoursInDay=23
+     let hoursInDay=24
      let minutes= 60
      let seconds= 60
  
@@ -98,20 +123,26 @@
  
  
      if(distanceDay>=1){
-         console.log(`${distanceDay} day ago`);
+        return (`${distanceDay} day ago`);
      }else{
          if(distanceHours >=1){
-             console.log(`${distanceHours} hours ago`);
+             return (`${distanceHours} hours ago`);
          }else{
              if(distanceMinutes >=1){
-                 console.log(`${distanceMinutes} minutes ago`);
+                return (`${distanceMinutes} minutes ago`);
              }else{
-                 console.log(`${distanceSeconds} seconds ago`);
+                return (`${distanceSeconds} seconds ago`);
              }
          }
      }
  }
+ getDistanceTime(new Date())
 
  setInterval(()=>{
    renderBlog()
  },3000)
+
+//author
+//category
+//search
+//delate
